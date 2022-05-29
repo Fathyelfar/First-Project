@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package View;
 
 import Controller.ProjectListener;
@@ -258,10 +254,8 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainFrame().setVisible(true);
         });
     }
 
@@ -363,6 +357,18 @@ private TableStatementOfInvoicesModel InvoicesTableModel;
 
     public int getNextInvoiceNum() {
         int num=0;
+        
+        for (StatementOfInvoices invoice:getInvoices()){
+            if(invoice.getNum()>num)
+                num=invoice.getNum();
+            }
+               
+                return num;}
+            
+        }
+            
+        
+            
     
 
                      

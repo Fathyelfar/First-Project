@@ -7,10 +7,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-/**
- *
- * @author DELL
- */
+
 public class LineitemOfInvDialog extends JDialog{
     private JTextField itemLineNameField;
     private JTextField itemLineCountField;

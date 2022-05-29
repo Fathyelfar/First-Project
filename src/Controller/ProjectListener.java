@@ -125,7 +125,6 @@ public class ProjectListener implements ActionListener, ListSelectionListener {
                         StatementOfInvoices invoice = new StatementOfInvoices(invoiceNum, invoiceDate, customerName);
                         arrayInv.add(invoice);
                     } catch (Exception ex) {
-                        ex.printStackTrace();
                         JOptionPane.showMessageDialog(invframe, "Error in line format", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -157,7 +156,6 @@ public class ProjectListener implements ActionListener, ListSelectionListener {
                             LineItemInv line = new LineItemInv(itemName, itemPrice, count, inv);
                             inv.getLines().add(line);
                         } catch (Exception ex) {
-                            ex.printStackTrace();
                             JOptionPane.showMessageDialog(invframe, "Error in line format", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
@@ -178,7 +176,6 @@ public class ProjectListener implements ActionListener, ListSelectionListener {
             
             
         } catch (IOException ex) {
-            ex.printStackTrace();
             JOptionPane.showMessageDialog(invframe, "Cannot read file", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -187,7 +184,12 @@ public class ProjectListener implements ActionListener, ListSelectionListener {
         ArrayList<StatementOfInvoices> invoices = invframe.getInvoices();
         String headers = "";
         String lines = "";
-        for (StatementOfInvoices invoice : invoices) {
+        
+        //Fixed the null pointer exception error 
+        if(invoices!=null)
+       
+        // For Loop 
+            for(StatementOfInvoices invoice :invoices){
             String invCSV = invoice.getAsCSV();
             headers += invCSV;
             headers += "\n";
@@ -196,6 +198,9 @@ public class ProjectListener implements ActionListener, ListSelectionListener {
                 String lineCSV = line.getAsCSV();
                 lines += lineCSV;
                 lines += "\n";
+                
+                
+                
             }
         }
         
@@ -331,6 +336,7 @@ public class ProjectListener implements ActionListener, ListSelectionListener {
             invoice.getLines().add(line);
             TableStatementOfItemsModel linesTableModel = (TableStatementOfItemsModel) invframe.getLineTable().getModel();
             linesTableModel.fireTableDataChanged();
+            //Updating the total 
             invframe.getInvoicesTableModel().fireTableDataChanged();
         }
         linesDialog.setVisible(false);
@@ -338,6 +344,6 @@ public class ProjectListener implements ActionListener, ListSelectionListener {
         linesDialog = null;
     }
 
-    
+              
 
 }
